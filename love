@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Для моей любимой ❤️</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    font-family:Arial, Helvetica, sans-serif;
+    background:linear-gradient(135deg,#ffb6c1,#ffd6e8);
+}
+
+.card{
+    background:white;
+    padding:45px;
+    border-radius:25px;
+    text-align:center;
+    box-shadow:0 15px 40px rgba(0,0,0,.2);
+}
+
+h1{
+    font-size:38px;
+    margin-bottom:20px;
+}
+
+p{
+    font-size:24px;
+    margin-bottom:30px;
+}
+
+button{
+    padding:15px 35px;
+    font-size:20px;
+    border:none;
+    border-radius:15px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+#yes{
+    background:#ff4d6d;
+    color:white;
+    margin-right:20px;
+}
+
+#yes:hover{
+    transform:scale(1.05);
+}
+
+#no{
+    position:absolute;
+    background:#777;
+    color:white;
+}
+
+.final{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    height:100vh;
+    width:100%;
+    text-align:center;
+    background:linear-gradient(135deg,#ff9ecb,#ffe5f2);
+}
+
+#typing{
+    margin-top:35px;
+    font-size:42px;
+    color:#d6336c;
+    font-weight:bold;
+    height:60px;
+}
+
+.emoji{
+    position:fixed;
+    pointer-events:none;
+    animation:fly 5s linear forwards;
+}
+
+@keyframes fly{
+    from{
+        transform:translateY(0) rotate(0deg);
+        opacity:1;
+    }
+    to{
+        transform:translateY(-120vh) rotate(720deg);
+        opacity:0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<h1>❤️ Привет, любимая ❤️</h1>
+
+<p>Пойдешь со мной на свидание?</p>
+
+<button id="yes">Да 💖</button>
+
+</div>
+
+<button id="no">Нет 😅</button>
+
+<script>
+
+const no = document.getElementById("no");
+
+function moveButton(){
+
+const x = Math.random()*(window.innerWidth-120);
+const y = Math.random()*(window.innerHeight-60);
+
+no.style.left = x+"px";
+no.style.top = y+"px";
+
+}
+
+moveButton();
+
+no.addEventListener("mouseenter",moveButton);
+no.addEventListener("click",moveButton);
+
+document.getElementById("yes").onclick=function(){
+
+document.body.innerHTML=`
+
+<div class="final">
+
+<h1 style="font-size:60px;">
+🥳 Урааа!! ❤️
+</h1>
+
+<p style="font-size:28px;margin-top:20px;">
+Я очень счастлив! 🌹<br><br>
+Теперь осталось только дождаться нашего свидания...
+</p>
+
+<h2 id="typing"></h2>
+
+</div>
+
+`;
+
+const text = "Я люблю тебя ❤️";
+const typing = document.getElementById("typing");
+
+let i = 0;
+
+function type(){
+
+if(i<text.length){
+
+typing.innerHTML += text.charAt(i);
+
+i++;
+
+setTimeout(type,150);
+
+}
+
+}
+
+setTimeout(type,800);
+
+const emojis = [
+"😘","💋","❤️","🥰","💕","😍","💖","💘","🌹","✨"
+];
+
+setInterval(()=>{
+
+const emoji=document.createElement("div");
+
+emoji.className="emoji";
+
+emoji.innerHTML=emojis[Math.floor(Math.random()*emojis.length)];
+
+emoji.style.left=Math.random()*window.innerWidth+"px";
+
+emoji.style.bottom="-40px";
+
+emoji.style.fontSize=(30+Math.random()*35)+"px";
+
+document.body.appendChild(emoji);
+
+setTimeout(()=>{
+emoji.remove();
+},5000);
+
+},180);
+
+};
+
+</script>
+
+</body>
+</html>
